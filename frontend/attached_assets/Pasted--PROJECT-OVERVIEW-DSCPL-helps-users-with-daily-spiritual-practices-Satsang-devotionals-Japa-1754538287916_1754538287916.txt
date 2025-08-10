@@ -1,0 +1,84 @@
+**PROJECT OVERVIEW:**
+DSCPL helps users with daily spiritual practices: Satsang (devotionals), Japa (mantras), Dhyana (meditation), and Accountability tracking. Users select topics, get 7-day programs, and receive AI-generated spiritual content.
+
+**TECHNOLOGY STACK:**
+- Python FastAPI backend
+- MongoDB Atlas (free tier) - use Motor async driver
+- Redis (free tier) for caching
+- Google Gemini API for AI content generation
+- JWT authentication
+- Pydantic for data validation
+
+**CORE FEATURES TO IMPLEMENT:**
+1. User authentication (register/login/JWT tokens)
+2. Spiritual programs management (create 7-day programs)
+3. AI content generation for daily spiritual content
+4. Progress tracking
+5. RESTful API endpoints
+
+**DATABASE COLLECTIONS:**
+- users: {_id, email, name, hashed_password, spiritual_path, ishta_devata, created_at}
+- programs: {_id, user_id, program_type, topic, duration_days, current_day, status, daily_content, created_at}
+- user_progress: {_id, program_id, day_number, completed, reflection_notes, completed_at}
+
+**CRITICAL API ENDPOINTS TO BUILD:**
+POST /api/v1/auth/register
+POST /api/v1/auth/login
+GET /api/v1/users/profile
+POST /api/v1/programs (create new spiritual program)
+GET /api/v1/programs/{user_id} (get user's programs)
+GET /api/v1/content/daily/{program_id}/{day} (get daily content)
+POST /api/v1/ai/generate-content (generate spiritual content via Gemini)
+POST /api/v1/progress/update (update daily progress)
+GET /api/v1/progress/stats/{user_id} (get progress statistics)
+
+text
+
+**FRONTEND-BACKEND COMMUNICATION PROTOCOL:**
+- Frontend sends HTTP requests to backend API endpoints
+- All requests except auth use JWT Bearer token in Authorization header
+- Backend responds with JSON format: {success: boolean, data: object, message: string}
+- CORS enabled for frontend domain (Vercel deployment)
+- Error responses include error codes and details
+- Content caching with Redis (24 hours for daily content)
+
+**AI CONTENT STRUCTURE:**
+Generate spiritual content in JSON format:
+{
+"satsang": {
+"scripture": {"text": "Sanskrit verse", "translation": "English", "source": "Bhagavad Gita 2.47"},
+"explanation": "2-3 paragraphs",
+"practical_application": "Daily practice guidance",
+"reflection_questions": ["Q1", "Q2"]
+},
+"japa": {
+"mantra": "Sanskrit mantra",
+"translation": "English meaning",
+"pronunciation": "Phonetic guide",
+"repetitions": 108,
+"duration": "15 minutes"
+},
+"dhyana": {
+"technique": "Meditation method",
+"instructions": ["Step 1", "Step 2"],
+"duration": "10 minutes",
+"focus_point": "Breath/chakra/mantra"
+}
+}
+
+text
+
+**REQUIREMENTS:**
+- Write MINIMAL lines of code but ensure COMPLETE functionality
+- Use async/await for database operations
+- Implement proper error handling and validation
+- Add JWT middleware for protected routes
+- Cache AI-generated content to reduce API calls
+- Include basic rate limiting
+- Deploy-ready code for Railway/Render free tier
+
+**SPIRITUAL CONTEXT:**
+- Content should be authentic Hindu spiritual practices
+- Support different paths: Bhakti, Jnana, Karma, Raja Yoga
+- Include popular deities: Krishna, Shiva, Devi, Rama
+- Use respectful and traditional terminology

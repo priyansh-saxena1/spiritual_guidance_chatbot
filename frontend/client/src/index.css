@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Sans+Devanagari:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Crimson+Text:ital,wght@0,400;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hindu Spiritual Design System - Sacred Colors & Elements */
+
+@layer base {
+  :root {
+    /* Sacred Background System */
+    --background: 45 100% 96%;  /* Soft cream background */
+    --foreground: 0 50% 15%;    /* Deep maroon text */
+
+    /* Sacred Card System */
+    --card: 0 0% 100%;          /* Pure white cards */
+    --card-foreground: 0 50% 15%;
+
+    /* Popover System */
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 50% 15%;
+
+    /* Primary - Sacred Saffron */
+    --primary: 25 100% 60%;     /* Saffron #FF9933 */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 30 100% 65%; /* Lighter saffron for glow effects */
+
+    /* Secondary - Deep Orange */
+    --secondary: 20 100% 51%;   /* Deep orange #FF6600 */
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted - Golden tones */
+    --muted: 45 100% 90%;       /* Light golden cream */
+    --muted-foreground: 25 40% 40%;
+
+    /* Accent - Sacred Gold */
+    --accent: 51 100% 50%;      /* Pure gold #FFD700 */
+    --accent-foreground: 0 50% 15%;
+
+    /* Sacred Maroon */
+    --sacred-maroon: 0 100% 25%; /* Deep maroon #800000 */
+    --sacred-maroon-foreground: 0 0% 100%;
+
+    /* Destructive - Kept subtle */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders and inputs - Golden tones */
+    --border: 45 60% 85%;
+    --input: 45 60% 90%;
+    --ring: 25 100% 60%;
+
+    --radius: 0.75rem;
+
+    /* Sacred Gradients */
+    --gradient-dawn: linear-gradient(135deg, hsl(25 100% 60%) 0%, hsl(20 100% 51%) 50%, hsl(0 100% 25%) 100%);
+    --gradient-lotus: linear-gradient(45deg, hsl(51 100% 50%) 0%, hsl(45 100% 96%) 30%, hsl(25 100% 60%) 100%);
+    --gradient-temple: linear-gradient(180deg, hsl(0 50% 27%) 0%, hsl(30 60% 60%) 50%, hsl(45 100% 96%) 100%);
+    --gradient-sacred-fire: radial-gradient(circle, hsl(20 100% 51%) 0%, hsl(25 100% 60%) 50%, hsl(51 100% 50%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(45 100% 98%) 0%, hsl(45 100% 94%) 100%);
+
+    /* Sacred Shadows */
+    --shadow-sacred: 0 10px 30px -10px hsl(25 100% 60% / 0.3);
+    --shadow-glow: 0 0 40px hsl(25 100% 60% / 0.4);
+    --shadow-lotus: 0 8px 32px -8px hsl(20 100% 51% / 0.25);
+
+    /* Animations */
+    --transition-sacred: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-gentle: all 0.3s ease-out;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    background: var(--gradient-subtle);
+  }
+}
+
+@layer components {
+  /* Sacred Typography Classes */
+  .heading-sacred {
+    @apply font-cinzel font-semibold text-sacred-maroon tracking-wide;
+  }
+  
+  .sanskrit-text {
+    @apply font-devanagari text-2xl text-secondary text-center leading-relaxed;
+    text-shadow: 0 2px 4px rgba(255, 153, 51, 0.3);
+  }
+  
+  .transliteration {
+    @apply font-crimson italic text-amber-700 text-sm;
+  }
+
+  /* Sacred Button Variants */
+  .btn-sacred {
+    @apply bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6 py-3 rounded-xl;
+    @apply shadow-sacred hover:shadow-glow transition-all duration-300;
+    @apply border border-primary/20;
+  }
+  
+  .btn-lotus {
+    background: var(--gradient-lotus);
+    @apply text-sacred-maroon font-semibold px-8 py-4 rounded-2xl;
+    @apply shadow-lotus hover:shadow-glow transition-all duration-300;
+    @apply border border-accent/30;
+  }
+  
+  .btn-temple {
+    background: var(--gradient-temple);
+    @apply text-white font-medium px-6 py-3 rounded-xl;
+    @apply shadow-sacred hover:shadow-glow transition-all duration-300;
+  }
+
+  /* Sacred Card Styles */
+  .card-sacred {
+    @apply bg-card rounded-2xl p-6 shadow-lotus border border-border/50;
+    @apply hover:shadow-glow transition-all duration-300;
+    @apply backdrop-blur-sm;
+  }
+  
+  .card-lotus {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 248, 220, 0.8) 100%);
+    @apply rounded-3xl p-8 shadow-sacred border border-accent/20;
+    @apply hover:shadow-glow hover:scale-[1.02] transition-all duration-300;
+  }
+
+  /* Sacred Gradient Backgrounds */
+  .bg-dawn {
+    background: var(--gradient-dawn);
+  }
+  
+  .bg-lotus {
+    background: var(--gradient-lotus);
+  }
+  
+  .bg-temple {
+    background: var(--gradient-temple);
+  }
+  
+  .bg-sacred-fire {
+    background: var(--gradient-sacred-fire);
+  }
+
+  /* Sacred Animations */
+  .animate-breathe {
+    animation: breathe 4s ease-in-out infinite;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  /* Om Symbol Styling */
+  .om-symbol {
+    @apply text-6xl text-primary transition-all duration-300;
+    filter: drop-shadow(0 4px 8px rgba(255, 153, 51, 0.3));
+    text-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
+  }
+  
+  .om-symbol:hover {
+    @apply scale-110;
+    filter: drop-shadow(0 8px 16px rgba(255, 153, 51, 0.5));
+    text-shadow: 0 0 30px rgba(255, 102, 0, 0.8);
+    transform: scale(1.1) rotate(2deg);
+  }
+
+  /* Lotus Decoration */
+  .lotus-bg {
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(255, 153, 51, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(255, 102, 0, 0.08) 0%, transparent 50%);
+    background-size: 120px 120px;
+  }
+}
+
+@layer utilities {
+  /* Sacred Keyframes */
+  @keyframes breathe {
+    0%, 100% { 
+      transform: scale(1); 
+      opacity: 0.7; 
+    }
+    50% { 
+      transform: scale(1.1); 
+      opacity: 1; 
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% { 
+      transform: translateY(0px) rotate(0deg); 
+    }
+    50% { 
+      transform: translateY(-15px) rotate(2deg); 
+    }
+  }
+  
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 20px rgba(255, 153, 51, 0.4);
+    }
+    to {
+      box-shadow: 0 0 40px rgba(255, 153, 51, 0.8);
+    }
+  }
+  
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes ripple {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+}
