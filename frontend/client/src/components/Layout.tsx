@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigation } from './Navigation';
+import { Sidebar } from './Sidebar';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -8,9 +8,11 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen bg-sacred-cream">
-      <Navigation />
-      <main>
-        {children}
+      <Sidebar />
+      <main className="ml-64 transition-all duration-300">
+        <div className="p-6">
+          {children}
+        </div>
       </main>
     </div>
   );

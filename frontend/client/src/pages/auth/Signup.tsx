@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
+import { Flower2 } from 'lucide-react';
 
 const spiritualPaths = [
   { value: 'bhakti', label: 'Bhakti Yoga (Devotion)' },
@@ -52,14 +53,10 @@ export const Signup: React.FC = () => {
     setLoading(true);
 
     try {
-      await signUp(formData.email, formData.password, {
-        name: formData.name,
-        spiritual_path: formData.spiritual_path,
-        ishta_devata: formData.ishta_devata,
-      });
+      await signUp(formData.email, formData.password, formData.name);
       
       toast({
-        title: "Welcome to DSCPL! 🙏",
+        title: "Welcome to DSCPL!",
         description: "Your spiritual journey begins now"
       });
       setLocation('/app/dashboard');
@@ -78,7 +75,9 @@ export const Signup: React.FC = () => {
     <div className="min-h-screen bg-gradient-sacred-dawn flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="text-6xl mb-4 animate-fade-in">🕉️</div>
+          <div className="flex items-center justify-center w-24 h-24 bg-gradient-lotus rounded-full mx-auto mb-4 animate-fade-in">
+            <Flower2 size={48} className="text-sacred-maroon" />
+          </div>
           <h1 className="text-3xl font-bold text-sacred-maroon mb-2">Begin Your Journey</h1>
           <p className="text-muted-foreground">Join the spiritual path with DSCPL</p>
         </div>

@@ -7,16 +7,16 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { user, isLoading } = useAuth();
   const [, setLocation] = useLocation();
 
   useEffect(() => {
-    if (!loading && !user) {
+    if (!isLoading && !user) {
       setLocation('/auth/login');
     }
-  }, [loading, user, setLocation]);
+  }, [isLoading, user, setLocation]);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-sacred-cream flex items-center justify-center">
         <div className="text-center">

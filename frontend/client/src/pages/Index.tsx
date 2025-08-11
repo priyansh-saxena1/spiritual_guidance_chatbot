@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'wouter';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { BookOpen, Sparkles, Brain, Flower2, Music, MessageCircle, Timer, Flame } from 'lucide-react';
 
 const Index = () => {
   const [selectedPractice, setSelectedPractice] = useState<string | null>(null);
@@ -12,7 +13,7 @@ const Index = () => {
       title: 'Satsang',
       subtitle: 'Divine Teachings',
       description: 'Sacred scriptures, divine wisdom, and spiritual guidance for your journey',
-      icon: '🕉️',
+      icon: BookOpen,
       color: 'from-primary to-secondary'
     },
     {
@@ -20,7 +21,7 @@ const Index = () => {
       title: 'Japa',
       subtitle: 'Sacred Mantras',
       description: 'Mantra meditation with counter, pronunciation guides, and divine vibrations',
-      icon: '📿',
+      icon: Sparkles,
       color: 'from-secondary to-accent'
     },
     {
@@ -28,7 +29,7 @@ const Index = () => {
       title: 'Dhyana',
       subtitle: 'Meditation',
       description: 'Guided meditation with breathing techniques and mindfulness practices',
-      icon: '🪷',
+      icon: Brain,
       color: 'from-accent to-primary'
     }
   ];
@@ -38,9 +39,11 @@ const Index = () => {
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16">
-          {/* Floating Om Symbol */}
+          {/* Floating Sacred Symbol */}
           <div className="mb-8 animate-float">
-            <span className="om-symbol">🕉️</span>
+            <div className="flex items-center justify-center w-24 h-24 bg-gradient-lotus rounded-full mx-auto shadow-glow">
+              <Flower2 size={48} className="text-sacred-maroon" />
+            </div>
           </div>
           
           <h1 className="heading-sacred text-6xl md:text-7xl mb-6">
@@ -73,8 +76,8 @@ const Index = () => {
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="text-center">
-                <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                  {practice.icon}
+                <div className="flex items-center justify-center w-20 h-20 bg-gradient-lotus rounded-full mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <practice.icon size={32} className="text-sacred-maroon" />
                 </div>
                 <h3 className="heading-sacred text-2xl mb-2">{practice.title}</h3>
                 <p className="text-primary font-medium mb-4">{practice.subtitle}</p>
@@ -117,31 +120,31 @@ const Index = () => {
           <div className="pt-8 border-t border-border/50">
             <p className="text-sm text-muted-foreground mb-4">Quick Access</p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/auth/login" className="text-primary hover:text-primary/80 text-sm">
-                🕉️ Daily Satsang
+              <Link to="/auth/login" className="text-primary hover:text-primary/80 text-sm flex items-center gap-2">
+                <Flower2 size={16} /> Daily Satsang
               </Link>
-              <Link to="/auth/login" className="text-primary hover:text-primary/80 text-sm">
-                📿 Mantra Japa
+              <Link to="/auth/login" className="text-primary hover:text-primary/80 text-sm flex items-center gap-2">
+                <Music size={16} /> Mantra Japa
               </Link>
-              <Link to="/auth/login" className="text-primary hover:text-primary/80 text-sm">
-                🧘‍♀️ Meditation Timer
+              <Link to="/auth/login" className="text-primary hover:text-primary/80 text-sm flex items-center gap-2">
+                <Timer size={16} /> Meditation Timer
               </Link>
-              <Link to="/auth/login" className="text-primary hover:text-primary/80 text-sm">
-                💬 Spiritual Chat
+              <Link to="/auth/login" className="text-primary hover:text-primary/80 text-sm flex items-center gap-2">
+                <MessageCircle size={16} /> Spiritual Chat
               </Link>
             </div>
           </div>
         </div>
 
         {/* Floating Decorative Elements */}
-        <div className="fixed top-20 left-10 animate-float opacity-30 text-2xl" style={{ animationDelay: '1s' }}>
-          🪷
+        <div className="fixed top-20 left-10 animate-float opacity-20 text-primary" style={{ animationDelay: '1s' }}>
+          <Flower2 size={24} />
         </div>
-        <div className="fixed top-40 right-16 animate-float opacity-30 text-xl" style={{ animationDelay: '2s' }}>
-          ✨
+        <div className="fixed top-40 right-16 animate-float opacity-20 text-secondary" style={{ animationDelay: '2s' }}>
+          <Sparkles size={20} />
         </div>
-        <div className="fixed bottom-32 left-20 animate-float opacity-30 text-2xl" style={{ animationDelay: '3s' }}>
-          🕯️
+        <div className="fixed bottom-32 left-20 animate-float opacity-20 text-accent" style={{ animationDelay: '3s' }}>
+          <Flame size={24} />
         </div>
       </div>
 
@@ -162,7 +165,9 @@ const Index = () => {
               {selectedPractice === 'satsang' && (
                 <Card className="card-sacred backdrop-blur-lg bg-white/90">
                   <div className="text-center space-y-6">
-                    <div className="text-4xl">🕉️</div>
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-sacred-maroon/10 mx-auto">
+                      <BookOpen className="w-6 h-6 text-sacred-maroon" />
+                    </div>
                     <div className="sanskrit-text">
                       कर्मण्येवाधिकारस्ते मा फलेषु कदाचन
                     </div>
@@ -188,11 +193,11 @@ const Index = () => {
                 <Card className="card-sacred backdrop-blur-lg bg-white/90">
                   <div className="text-center space-y-6">
                     <div className="relative w-48 h-48 mx-auto">
-                      <div className="absolute inset-0 rounded-full border-4 border-primary/20"></div>
-                      <div className="absolute inset-0 rounded-full border-4 border-primary border-dashed animate-spin" style={{ animationDuration: '8s' }}></div>
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center">
-                          <div className="text-4xl mb-2">📿</div>
+                          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-sacred-maroon/10 mx-auto mb-2">
+                            <Sparkles className="w-5 h-5 text-sacred-maroon" />
+                          </div>
                           <div className="text-2xl font-bold text-primary">108</div>
                           <div className="text-sm text-muted-foreground">Repetitions</div>
                         </div>

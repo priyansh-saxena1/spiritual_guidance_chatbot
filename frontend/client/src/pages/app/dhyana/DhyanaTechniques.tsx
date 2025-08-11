@@ -2,6 +2,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'wouter';
+import { Layout } from '@/components/Layout';
+import { Wind, Sparkles, Eye, Heart, Mountain, Flower } from 'lucide-react';
 
 export const DhyanaTechniques = () => {
   const techniques = [
@@ -13,7 +15,7 @@ export const DhyanaTechniques = () => {
       duration: '15-30 min',
       level: 'Beginner',
       benefits: ['Calms mind', 'Reduces stress', 'Increases focus'],
-      emoji: '🌬️'
+      icon: Wind
     },
     {
       id: 'mantra',
@@ -23,7 +25,7 @@ export const DhyanaTechniques = () => {
       duration: '20-45 min',
       level: 'Intermediate',
       benefits: ['Purifies mind', 'Connects to divine', 'Deep peace'],
-      emoji: '🕉️'
+      icon: Sparkles
     },
     {
       id: 'trataka',
@@ -33,7 +35,7 @@ export const DhyanaTechniques = () => {
       duration: '10-20 min',
       level: 'Beginner',
       benefits: ['Improves focus', 'Strengthens eyes', 'Mental clarity'],
-      emoji: '🕯️'
+      icon: Eye
     },
     {
       id: 'chakra',
@@ -43,26 +45,33 @@ export const DhyanaTechniques = () => {
       duration: '30-60 min',
       level: 'Advanced',
       benefits: ['Balances energy', 'Spiritual growth', 'Inner awareness'],
-      emoji: '🌈'
+      icon: Heart
     }
   ];
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      {/* Header */}
-      <div className="text-center mb-8">
-        <div className="text-6xl mb-4">🧘‍♀️</div>
-        <h1 className="text-3xl font-bold text-sacred-maroon mb-2">Dhyana Techniques</h1>
-        <p className="text-lg text-muted-foreground">Traditional meditation practices for inner peace</p>
-      </div>
+    <Layout>
+      <div className="max-w-6xl mx-auto p-6">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-sacred-maroon/10 flex items-center justify-center">
+            <Mountain className="w-10 h-10 text-sacred-maroon" />
+          </div>
+          <h1 className="text-3xl font-bold text-sacred-maroon mb-2">Dhyana Techniques</h1>
+          <p className="text-lg text-muted-foreground">Traditional meditation practices for inner peace</p>
+        </div>
 
       {/* Techniques Grid */}
       <div className="grid md:grid-cols-2 gap-6 mb-8">
-        {techniques.map((technique) => (
-          <Card key={technique.id} className="card-sacred hover:shadow-glow transition-all duration-300">
-            <CardHeader>
-              <div className="flex items-center justify-between mb-4">
-                <div className="text-4xl">{technique.emoji}</div>
+        {techniques.map((technique) => {
+          const IconComponent = technique.icon;
+          return (
+            <Card key={technique.id} className="card-sacred hover:shadow-glow transition-all duration-300">
+              <CardHeader>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 rounded-full bg-sacred-maroon/10 flex items-center justify-center">
+                    <IconComponent className="w-6 h-6 text-sacred-maroon" />
+                  </div>
                 <Badge variant={technique.level === 'Beginner' ? 'default' : technique.level === 'Intermediate' ? 'secondary' : 'destructive'}>
                   {technique.level}
                 </Badge>
@@ -103,7 +112,8 @@ export const DhyanaTechniques = () => {
               </div>
             </CardContent>
           </Card>
-        ))}
+        );
+      })}
       </div>
 
       {/* Quick Actions */}
@@ -111,7 +121,9 @@ export const DhyanaTechniques = () => {
         <Link to="/app/dhyana/timer">
           <Card className="card-sacred hover:shadow-lg transition-all cursor-pointer">
             <CardContent className="text-center p-6">
-              <div className="text-3xl mb-2">⏰</div>
+              <div className="w-10 h-10 mx-auto mb-2 rounded-full bg-sacred-maroon/10 flex items-center justify-center">
+                <Wind className="w-5 h-5 text-sacred-maroon" />
+              </div>
               <h3 className="font-semibold text-sacred-maroon">Meditation Timer</h3>
               <p className="text-sm text-muted-foreground">Self-guided practice</p>
             </CardContent>
@@ -121,7 +133,9 @@ export const DhyanaTechniques = () => {
         <Link to="/app/dhyana/guided">
           <Card className="card-sacred hover:shadow-lg transition-all cursor-pointer">
             <CardContent className="text-center p-6">
-              <div className="text-3xl mb-2">🎧</div>
+              <div className="w-10 h-10 mx-auto mb-2 rounded-full bg-sacred-maroon/10 flex items-center justify-center">
+                <Flower className="w-5 h-5 text-sacred-maroon" />
+              </div>
               <h3 className="font-semibold text-sacred-maroon">Guided Sessions</h3>
               <p className="text-sm text-muted-foreground">Audio guidance</p>
             </CardContent>
@@ -131,13 +145,16 @@ export const DhyanaTechniques = () => {
         <Link to="/app/dhyana/progress">
           <Card className="card-sacred hover:shadow-lg transition-all cursor-pointer">
             <CardContent className="text-center p-6">
-              <div className="text-3xl mb-2">📈</div>
+              <div className="w-10 h-10 mx-auto mb-2 rounded-full bg-sacred-maroon/10 flex items-center justify-center">
+                <Mountain className="w-5 h-5 text-sacred-maroon" />
+              </div>
               <h3 className="font-semibold text-sacred-maroon">Track Progress</h3>
               <p className="text-sm text-muted-foreground">View statistics</p>
             </CardContent>
           </Card>
         </Link>
       </div>
-    </div>
+      </div>
+    </Layout>
   );
 };

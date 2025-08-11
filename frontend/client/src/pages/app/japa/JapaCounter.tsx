@@ -4,7 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { MantraCounter } from '@/components/ui/mantra-counter';
-import { Play, Pause, RotateCcw, Volume2, VolumeX, Settings } from 'lucide-react';
+import { Play, Pause, RotateCcw, Volume2, VolumeX, Settings, Sparkles } from 'lucide-react';
+import { Layout } from '@/components/Layout';
 
 export const JapaCounter: React.FC = () => {
   const [count, setCount] = useState(0);
@@ -20,7 +21,7 @@ export const JapaCounter: React.FC = () => {
     transliteration: 'Om Namaḥ Śivāya',
     meaning: 'I bow to Shiva, the supreme consciousness',
     deity: 'Lord Shiva',
-    emoji: '🕉️'
+    icon: Sparkles
   };
 
   useEffect(() => {
@@ -72,15 +73,20 @@ export const JapaCounter: React.FC = () => {
 
   const averagePace = timer > 0 && count > 0 ? Math.round(timer / count) : 0;
 
+  const IconComponent = currentMantra.icon;
+
   return (
-    <div className="min-h-screen bg-sacred-cream">
-      <div className="max-w-4xl mx-auto p-6">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="text-6xl mb-4">{currentMantra.emoji}</div>
-          <h1 className="text-3xl font-bold text-sacred-maroon mb-2">Japa Counter</h1>
-          <p className="text-lg text-muted-foreground">{currentMantra.name}</p>
-        </div>
+    <Layout>
+      <div className="min-h-screen bg-sacred-cream">
+        <div className="max-w-4xl mx-auto p-6">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-sacred-maroon/10 flex items-center justify-center">
+              <IconComponent className="w-10 h-10 text-sacred-maroon" />
+            </div>
+            <h1 className="text-3xl font-bold text-sacred-maroon mb-2">Japa Counter</h1>
+            <p className="text-lg text-muted-foreground">{currentMantra.name}</p>
+          </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Main Counter */}
@@ -252,13 +258,15 @@ export const JapaCounter: React.FC = () => {
                   📚 Mantra Library
                 </Button>
                 <Button variant="outline" className="w-full justify-start">
-                  📊 View History
+                  <Settings className="w-4 h-4 mr-2" />
+                  View History
                 </Button>
               </CardContent>
             </Card>
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };

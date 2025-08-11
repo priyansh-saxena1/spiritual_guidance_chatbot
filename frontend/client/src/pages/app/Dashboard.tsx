@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { useAuth } from '@/contexts/AuthContext';
+import { Layout } from '@/components/Layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -14,7 +15,6 @@ const practiceCards = [
     icon: BookOpen,
     link: '/app/satsang/daily',
     progress: 0,
-    emoji: '📿',
     gradient: 'bg-gradient-to-br from-amber-50 to-orange-100'
   },
   {
@@ -24,7 +24,6 @@ const practiceCards = [
     icon: Sparkles,
     link: '/app/japa/counter',
     progress: 34,
-    emoji: '🔮',
     gradient: 'bg-gradient-to-br from-purple-50 to-pink-100'
   },
   {
@@ -34,7 +33,6 @@ const practiceCards = [
     icon: Brain,
     link: '/app/dhyana/timer',
     progress: 0,
-    emoji: '🧘‍♀️',
     gradient: 'bg-gradient-to-br from-blue-50 to-indigo-100'
   },
   {
@@ -44,16 +42,15 @@ const practiceCards = [
     icon: Target,
     link: '/app/accountability/habits',
     progress: 0,
-    emoji: '🎯',
     gradient: 'bg-gradient-to-br from-green-50 to-emerald-100'
   }
 ];
 
 const quickStats = [
-  { label: 'Current Streak', value: '7 days', emoji: '🔥' },
-  { label: 'Programs Completed', value: '3', emoji: '🏆' },
-  { label: 'Minutes Meditated', value: '245', emoji: '⏰' },
-  { label: 'Mantras Chanted', value: '1,296', emoji: '📿' },
+  { label: 'Current Streak', value: '7 days', icon: TrendingUp },
+  { label: 'Programs Completed', value: '3', icon: Target },
+  { label: 'Minutes Meditated', value: '245', icon: Brain },
+  { label: 'Mantras Chanted', value: '1,296', icon: Sparkles },
 ];
 
 const getTimeBasedGreeting = () => {
@@ -74,19 +71,21 @@ export const Dashboard: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-sacred-cream">
-      <div className="max-w-7xl mx-auto p-6">
+    <Layout>
+      <div className="p-6">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h1 className="text-3xl font-bold text-sacred-maroon mb-2">
-                {getTimeBasedGreeting()}, {user?.name} 🙏
+                {getTimeBasedGreeting()}, {user?.name}
               </h1>
               <p className="text-muted-foreground">{today}</p>
             </div>
             <div className="text-right">
-              <div className="text-2xl mb-2">🕉️</div>
+              <div className="flex items-center justify-center w-12 h-12 bg-sacred-orange/10 rounded-full mb-2">
+                <BookOpen className="text-sacred-orange" size={24} />
+              </div>
               <p className="text-sm text-sacred-orange font-semibold">Day 7 of your journey</p>
             </div>
           </div>
@@ -94,32 +93,41 @@ export const Dashboard: React.FC = () => {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          {quickStats.map((stat, index) => (
-            <Card key={index} className="card-sacred hover:shadow-glow transition-all duration-300">
-              <CardContent className="p-4 text-center">
-                <div className="text-2xl mb-2">{stat.emoji}</div>
-                <div className="text-2xl font-bold text-sacred-maroon mb-1">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
-              </CardContent>
-            </Card>
-          ))}
+          {quickStats.map((stat, index) => {
+            const IconComponent = stat.icon;
+            return (
+              <Card key={index} className="card-sacred hover:shadow-glow transition-all duration-300">
+                <CardContent className="p-4 text-center">
+                  <div className="flex items-center justify-center w-12 h-12 bg-sacred-orange/10 rounded-full mb-2 mx-auto">
+                    <IconComponent className="text-sacred-orange" size={20} />
+                  </div>
+                  <div className="text-2xl font-bold text-sacred-maroon mb-1">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         {/* Today's Practices */}
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-sacred-maroon mb-6">Today's Spiritual Practices</h2>
           <div className="grid md:grid-cols-2 gap-6">
-            {practiceCards.map((practice, index) => (
-              <Card key={index} className={`card-lotus hover:scale-[1.02] transition-all duration-300 ${practice.gradient}`}>
-                <CardHeader className="pb-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className="text-2xl">{practice.emoji}</div>
-                      <div>
-                        <CardTitle className="text-sacred-maroon">{practice.title}</CardTitle>
-                        <p className="text-sm text-muted-foreground">{practice.subtitle}</p>
+            {practiceCards.map((practice, index) => {
+              const IconComponent = practice.icon;
+              return (
+                <Card key={index} className={`card-lotus hover:scale-[1.02] transition-all duration-300 ${practice.gradient}`}>
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div className="flex items-center justify-center w-10 h-10 bg-white/50 rounded-lg">
+                          <IconComponent className="text-sacred-maroon" size={20} />
+                        </div>
+                        <div>
+                          <CardTitle className="text-sacred-maroon">{practice.title}</CardTitle>
+                          <p className="text-sm text-muted-foreground">{practice.subtitle}</p>
+                        </div>
                       </div>
-                    </div>
                     <practice.icon className="text-sacred-orange" size={24} />
                   </div>
                 </CardHeader>
@@ -143,7 +151,8 @@ export const Dashboard: React.FC = () => {
                   </Button>
                 </CardContent>
               </Card>
-            ))}
+              );
+            })}
           </div>
         </div>
 
@@ -180,15 +189,15 @@ export const Dashboard: React.FC = () => {
               <BookOpen className="mx-auto text-sacred-orange mb-4" size={32} />
               <h3 className="font-semibold text-sacred-maroon mb-2">New Program</h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Start a new spiritual learning program
+                Start a personalized spiritual journey
               </p>
               <Button asChild variant="outline" className="w-full">
-                <Link to="/app/satsang/topics">Browse Topics</Link>
+                <Link to="/app/programs/create">Create Program</Link>
               </Button>
             </CardContent>
           </Card>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };

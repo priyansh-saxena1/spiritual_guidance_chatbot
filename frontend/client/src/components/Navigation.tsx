@@ -12,7 +12,8 @@ import {
   TrendingUp, 
   User,
   Users,
-  LogOut
+  LogOut,
+  Flower2
 } from 'lucide-react';
 
 const navigationItems = [
@@ -43,20 +44,20 @@ export const Navigation: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center space-x-8">
-            <div className="flex items-center space-x-2">
-              <span className="text-2xl">🕉️</span>
+            <div className="flex items-center space-x-3">
+              <Flower2 size={24} className="text-sacred-maroon" />
               <span className="font-bold text-sacred-maroon text-xl">DSCPL</span>
             </div>
             
-            <div className="hidden md:flex space-x-1">
+            <div className="hidden lg:flex space-x-1">
               {navigationItems.map(({ to, icon: Icon, label }) => (
                 <Link
                   key={to}
                   href={to}
                   className={`
-                    flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                    flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors
                     ${location === to 
-                      ? 'bg-gradient-lotus text-sacred-maroon' 
+                      ? 'bg-gradient-lotus text-sacred-maroon shadow-sm' 
                       : 'text-muted-foreground hover:bg-accent/10 hover:text-sacred-maroon'
                     }
                   `}
@@ -68,35 +69,35 @@ export const Navigation: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center space-x-6">
-            <span className="text-sm text-muted-foreground whitespace-nowrap">
-              🙏 {user.name}
+          <div className="flex items-center space-x-4">
+            <span className="text-sm text-muted-foreground hidden sm:block">
+              Welcome, {user.name}
             </span>
-            <Button variant="outline" size="sm" onClick={handleSignOut} className="ml-4">
-              <LogOut size={16} className="mr-2" />
-              Sign Out
+            <Button variant="outline" size="sm" onClick={handleSignOut}>
+              <LogOut size={16} className="sm:mr-2" />
+              <span className="hidden sm:inline">Sign Out</span>
             </Button>
           </div>
         </div>
       </div>
 
       {/* Mobile Navigation */}
-      <div className="md:hidden border-t border-accent/20">
-        <div className="grid grid-cols-4 gap-1 p-2">
+      <div className="lg:hidden border-t border-accent/20">
+        <div className="grid grid-cols-5 gap-1 p-2">
           {navigationItems.slice(0, 8).map(({ to, icon: Icon, label }) => (
             <Link
               key={to}
               href={to}
               className={`
-                flex flex-col items-center space-y-1 p-2 rounded-lg text-xs transition-colors
+                flex flex-col items-center space-y-1 p-3 rounded-lg text-xs transition-colors
                 ${location === to 
-                  ? 'bg-gradient-lotus text-sacred-maroon' 
+                  ? 'bg-gradient-lotus text-sacred-maroon shadow-sm' 
                   : 'text-muted-foreground hover:bg-accent/10'
                 }
               `}
             >
               <Icon size={18} />
-              <span className="truncate w-full text-center">{label}</span>
+              <span className="truncate w-full text-center text-[10px]">{label}</span>
             </Link>
           ))}
         </div>

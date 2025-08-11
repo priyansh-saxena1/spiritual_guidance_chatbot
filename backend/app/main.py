@@ -34,9 +34,11 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_middleware(SlowAPIMiddleware)
 
 # CORS middleware
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:5176,http://localhost:5175,http://localhost:5173,http://localhost:3000").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.getenv("FRONTEND_URL", "http://localhost:3000")],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -53,12 +55,12 @@ async def shutdown_db_client():
     await close_mongo_connection()
     await close_redis_connection()
 
-# Include routers
-app.include_router(auth_router, prefix="/api/v1/auth", tags=["Authentication"])
-app.include_router(programs_router, prefix="/api/v1/programs", tags=["Programs"])
-app.include_router(content_router, prefix="/api/v1/content", tags=["Content"])
-app.include_router(ai_router, prefix="/api/v1/ai", tags=["AI Content"])
-app.include_router(progress_router, prefix="/api/v1/progress", tags=["Progress"])
+# Include routers (without api/v1 prefix to match frontend expectations)
+app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
+app.include_router(programs_router, prefix="/programs", tags=["Programs"])
+app.include_router(content_router, prefix="/content", tags=["Content"])
+app.include_router(ai_router, prefix="/ai", tags=["AI Content"])
+app.include_router(progress_router, prefix="/progress", tags=["Progress"])
 
 # Health check endpoint
 @app.get("/health")
