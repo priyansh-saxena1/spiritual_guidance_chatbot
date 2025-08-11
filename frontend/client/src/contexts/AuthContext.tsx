@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authAPI } from '@/lib/api';
+import { TokenStorage } from '@/lib/cookies';
 
 export interface User {
   id: string;
@@ -34,7 +35,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     // Check if user is logged in on mount
-    const token = localStorage.getItem('token');
+    const token = TokenStorage.getToken();
     
     if (token) {
       // Try to get user profile from backend
@@ -51,7 +52,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } catch (error) {
       console.error('Failed to refresh user:', error);
       // If refresh fails, clear token and use mock data for now
-      localStorage.removeItem('token');
+      TokenStorage.removeToken();
       setUser(null);
     } finally {
       setIsLoading(false);
@@ -77,7 +78,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       };
       
       const mockToken = 'mock-jwt-token';
-      localStorage.setItem('token', mockToken);
+      TokenStorage.setToken(mockToken);
       setUser(mockUser);
     } finally {
       setIsLoading(false);
